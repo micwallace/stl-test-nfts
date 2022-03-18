@@ -2,10 +2,10 @@
 Moralis.initialize(""); // Application id from moralis.io
 Moralis.serverURL = ""; //Server url from moralis.io
 
-const nft_contract_address = "";
+const nft_contract_address = "0xaFd1a2f17Ce2A694d2EF649fe5Ba51Cc0282448A";
 /*
 Available deployed contracts
-Ethereum Rinkeby:
+Ethereum Rinkeby: 0xaFd1a2f17Ce2A694d2EF649fe5Ba51Cc0282448A
 */
 
 const web3 = new Web3(window.ethereum);
@@ -71,18 +71,25 @@ async function mintToken(_uri){
 }
 
 // Approve minter
-async function grantMinterRole(_uri){
+async function grantOrRevokeMinterRole(revoke = false){
 
     let minterRole = web3.utils.keccak256('MINTER_ROLE');
+    let address = document.getElementById("address").value;
 
     const encodedFunction = web3.eth.abi.encodeFunctionCall({
-        name: "grantRole",
+        name: revoke ? "revokeRole" : "grantRole",
         type: "function",
-        inputs: [{
-            type: 'string',
-            name: 'tokenURI'
-        }]
-    }, [_uri]);
+        inputs: [
+            {
+                type: 'bytes32',
+                name: 'role'
+            },
+            {
+                type: 'address',
+                name: 'account'
+            }
+        ]},
+        [minterRole, address]);
 
     const transactionParameters = {
         to: nft_contract_address,
