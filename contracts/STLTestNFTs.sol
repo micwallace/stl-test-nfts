@@ -19,6 +19,10 @@ contract STLTestNFTs is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Burnab
         _grantRole(MINTER_ROLE, msg.sender);
     }
 
+    /*function _baseURI() internal pure override returns (string memory) {
+        return "https://ipfs.moralis.io:2053/ipfs/";
+    }*/
+
     function safeMint(address to, string memory uri) public onlyRole(MINTER_ROLE) {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
