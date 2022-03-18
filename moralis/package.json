@@ -1,0 +1,11 @@
+{
+  "name": "stl-test-nfts-moralis-client",
+  "version": "1.0.0",
+  "description": "STL test NFT minter app for moralis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

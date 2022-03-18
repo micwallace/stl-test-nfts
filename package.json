@@ -1,0 +1,17 @@
+{
+  "name": "stl-test-nfts",
+  "version": "1.0.0",
+  "description": "STL test NFT contract/minter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "hardhat": "^2.9.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.5.0"
+  }
+}
