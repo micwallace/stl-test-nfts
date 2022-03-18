@@ -46,20 +46,20 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h1>Grant/Revoke Minter Role</h1>
-                <hr>
-                <div class="mb-3">
-                    <div class="form-group">
-                        <div class="input-group mb-3">
-                            <input id="address" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <div class="row">
+                <div class="col">
+                    <h1>Grant/Revoke Minter Role</h1>
+                    <hr>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <input id="address" type="text" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="basic-addon1">
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary" id="grant-role" onclick="grantOrRevokeMinterRole();"></button>
-                        <button class="btn btn-primary" id="revoke-role" onclick="grantOrRevokeMinterRole(true);"></button>
+                        <div>
+                            <button class="btn btn-primary" id="grant-role" onclick="grantOrRevokeMinterRole();">Grant</button>
+                            <button class="btn btn-danger" id="revoke-role" onclick="grantOrRevokeMinterRole(true);">Revoke</button>
+                        </div>
                     </div>
                 </div>
             </div>
