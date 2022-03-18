@@ -1,6 +1,6 @@
 
-Moralis.initialize(""); // Application id from moralis.io
-Moralis.serverURL = ""; //Server url from moralis.io
+Moralis.initialize(MORALIS_APP_ID); // Application id from moralis.io
+Moralis.serverURL = MORALIS_SERVER_URL; //Server url from moralis.io
 
 const nft_contract_address = "0xaFd1a2f17Ce2A694d2EF649fe5Ba51Cc0282448A";
 /*
