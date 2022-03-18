@@ -29,6 +29,7 @@ async function login(){
         document.getElementById("file").removeAttribute("disabled");
         document.getElementById("name").removeAttribute("disabled");
         document.getElementById("description").removeAttribute("disabled");
+        document.getElementById("to-address").removeAttribute("disabled");
     })
 }
 
