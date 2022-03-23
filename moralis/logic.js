@@ -2,9 +2,10 @@
 Moralis.initialize(MORALIS_APP_ID); // Application id from moralis.io
 Moralis.serverURL = MORALIS_SERVER_URL; //Server url from moralis.io
 
-const nft_contract_address = "0xafd1a2f17ce2a694d2ef649fe5ba51cc0282448a";
+const nft_contract_address = "0xf19c56362cfdf66f7080e4a58bf199064e57e07c";
 /*
 Available deployed contracts
+Ethereum Rinkeby v2: 0xf19c56362cfdf66f7080e4a58bf199064e57e07c
 Ethereum Rinkeby: 0xafd1a2f17ce2a694d2ef649fe5ba51cc0282448a
 Ethereum Ropsten: 0xd1a108a5a39bea5daedba94b29a3913af7eca594
 */
@@ -86,6 +87,31 @@ async function upload(){
     document.getElementById("to-address").removeAttribute("disabled");
 }
 
+async function mintWithUri(){
+
+    document.getElementById('to-address-uri').setAttribute("disabled", null);
+    document.getElementById('token-uri').setAttribute("disabled", null);
+    document.getElementById('mint-with-uri').setAttribute("disabled", null);
+
+    try {
+        const toAddress = document.getElementById("to-address-uri").value;
+        const metadataURI = document.getElementById("token-uri").value;
+
+        const txt = await mintToken(toAddress, metadataURI);
+
+        await notify("Your NFT was minted in transaction", txt);
+
+    } catch (e){
+        console.log("Transaction failed: ");
+        console.log(e);
+        alert("Transaction failed, see console for more details");
+    }
+
+    document.getElementById("to-address-uri").removeAttribute("disabled");
+    document.getElementById("token-uri").removeAttribute("disabled");
+    document.getElementById("mint-with-uri").removeAttribute("disabled");
+}
+
 async function mintToken(toAddress, uri){
 
     if (!toAddress.trim())
@@ -116,6 +142,56 @@ async function mintToken(toAddress, uri){
         method: 'eth_sendTransaction',
         params: [transactionParameters]
     })
+}
+
+async function updateTokenUri(){
+
+    document.getElementById('update-token').setAttribute("disabled", null);
+    document.getElementById('new-token-uri').setAttribute("disabled", null);
+    document.getElementById('update-uri').setAttribute("disabled", null);
+
+    try {
+        const tokenId = document.getElementById("update-token").value;
+        const metadataURI = document.getElementById("token-uri").value;
+
+        const encodedFunction = web3.eth.abi.encodeFunctionCall({
+                name: "updateTokenURI",
+                type: "function",
+                inputs: [
+                    {
+                        type: 'uint256',
+                        name: 'tokenId'
+                    },
+                    {
+                        type: 'string',
+                        name: 'tokenURI'
+                    }
+                ]
+            },
+            [tokenId, metadataURI]);
+
+        const transactionParameters = {
+            to: nft_contract_address,
+            from: ethereum.selectedAddress,
+            data: encodedFunction
+        };
+        const txt = await ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [transactionParameters]
+        });
+
+        await notify("Token URI updated in transaction", txt);
+
+    } catch (e){
+        console.log("Transaction failed: ");
+        console.log(e);
+        alert("Transaction failed, see console for more details");
+    }
+
+    document.getElementById("update-token").removeAttribute("disabled");
+    document.getElementById("new-token-uri").removeAttribute("disabled");
+    document.getElementById("update-uri").removeAttribute("disabled");
+
 }
 
 // Approve minter
