@@ -93,6 +93,10 @@
                                 <input id="update-token" type="text" class="form-control" placeholder="Token ID" aria-label="ID" aria-describedby="basic-addon1">
                                 <input id="new-token-uri" type="text" class="form-control" placeholder="Metadata URI" aria-label="URL" aria-describedby="basic-addon1">
                             </div>
+                            <div class="input-group mb-3">
+                                <button class="btn btn-primary" id="nyan" style="margin-right: 20px;" onclick="document.getElementById('new-token-uri').value = 'https://ipfs.moralis.io:2053/ipfs/QmTjbbr6joJoVz4aUUV7b69msgRNRwZsidG9rMqr7y7Emw';">Nyan Cat</button>
+                                <button class="btn btn-primary" id="garfield" onclick="document.getElementById('new-token-uri').value = 'https://ipfs.moralis.io:2053/ipfs/QmaJs8QQXoTDekvDe7WKcCXLVhvJ6kQRQCrTAUddoQZLpy';">Garfield</button>
+                            </div>
                         </div>
                         <div>
                             <button class="btn btn-primary" id="update-uri" onclick="updateTokenUri();">Update</button>
