@@ -14,9 +14,20 @@ contract STLTestNFTs is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Burnab
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     Counters.Counter private _tokenIdCounter;
 
+    string _contractURI;
+
     constructor() ERC721("STLTestNFTs", "STLTEST") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
+        _contractURI = "";
+    }
+
+    function contractURI() public view returns (string memory) {
+        return _contractURI;
+    }
+
+    function setContractURI(string memory uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        _contractURI = uri;
     }
 
     /*function _baseURI() internal pure override returns (string memory) {
@@ -29,6 +40,13 @@ contract STLTestNFTs is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Burnab
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
     }
+
+    function updateTokenURI(uint256 tokenId, string memory uri){
+        _setTokenURI(tokenId, uri);
+        emit TokenURIUpdated(tokenId, uri);
+    }
+
+    event TokenURIUpdated(uint256 tokenId, string uri);
 
     // The following functions are overrides required by Solidity.
 
