@@ -152,7 +152,7 @@ async function updateTokenUri(){
 
     try {
         const tokenId = document.getElementById("update-token").value;
-        const metadataURI = document.getElementById("token-uri").value;
+        const metadataURI = document.getElementById("new-token-uri").value;
 
         const encodedFunction = web3.eth.abi.encodeFunctionCall({
                 name: "updateTokenURI",
@@ -218,10 +218,13 @@ async function getTokenUri(){
         from: ethereum.selectedAddress,
         data: encodedFunction
     };
-    const result = await ethereum.request({
+
+    var result = await ethereum.request({
         method: 'eth_call',
         params: [transactionParameters, "latest"]
     });
+
+    result = web3.eth.abi.decodeParameters(["string"], result)[0];
 
     alert(result);
 
