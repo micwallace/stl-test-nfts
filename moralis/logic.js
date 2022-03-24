@@ -194,6 +194,41 @@ async function updateTokenUri(){
 
 }
 
+async function getTokenUri(){
+
+    document.getElementById('get-token-id').setAttribute("disabled", null);
+    document.getElementById('get-uri').setAttribute("disabled", null);
+
+    const tokenId = document.getElementById("get-token-id").value;
+
+    const encodedFunction = web3.eth.abi.encodeFunctionCall({
+            name: "tokenURI",
+            type: "function",
+            inputs: [
+                {
+                    type: 'uint256',
+                    name: 'tokenId'
+                }
+            ]
+        },
+        [tokenId]);
+
+    const transactionParameters = {
+        to: nft_contract_address,
+        from: ethereum.selectedAddress,
+        data: encodedFunction
+    };
+    const result = await ethereum.request({
+        method: 'eth_call',
+        params: [transactionParameters, "latest"]
+    });
+
+    alert(result);
+
+    document.getElementById("get-token-id").removeAttribute("disabled");
+    document.getElementById("get-uri").removeAttribute("disabled");
+}
+
 // Approve minter
 async function grantOrRevokeMinterRole(revoke = false){
 
