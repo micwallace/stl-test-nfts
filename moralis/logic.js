@@ -241,7 +241,7 @@ async function updateContractUri(){
         const metadataURI = document.getElementById("new-contract-uri").value;
 
         const encodedFunction = web3.eth.abi.encodeFunctionCall({
-                name: "updateContractURI",
+                name: "setContractURI",
                 type: "function",
                 inputs: [
                     {
